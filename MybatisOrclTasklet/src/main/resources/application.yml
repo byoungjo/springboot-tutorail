@@ -1,0 +1,32 @@
+spring:
+  application.name : oracle db link tasklet
+  datasource:
+    url: "jdbc:oracle:thin:@203.235.217.163:1525/SKCCMISD"
+    username: mii_adm
+    password: zjvl00
+    driver-class-name: oracle.jdbc.OracleDriver
+    embedded-directory: target
+    initialization-mode: always
+    hikari:
+      maximum-pool-size: 4
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+  batch:
+    initialize-schema: always
+    job:
+      enabled: true #어플리케이션 구동시 컨텍스트 내의 모든 스프링 배치 작업 자동 실행 여부(false로 해야 구동시 무조건 실행이 안됨)
+
+mybatis:
+  type-aliases-package : com.batchdev.myBatisOrclTest.model # 패키지 명을 생략할 수 있도록 alias 설정
+  mapper-locations: classpath:mybatis-mapper/*.xml
+  configuration:
+    default-fetch-size: 100
+    lazyLoadingEnabled : true
+    aggressiveLazyLoading : false
+    mapUnderscoreToCamelCase : true  # model 프로퍼티 camel case 설정
+
+logging:
+  level.org.springframework.cloud.task : debug
+  level.org.springframework.batch: debug

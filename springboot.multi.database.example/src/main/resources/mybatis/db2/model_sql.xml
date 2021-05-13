@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="model2">
+	<select id="findModelByModelId" resultType="multi.database.model.Model">
+		<![CDATA[
+		SELECT
+		    *
+		FROM
+		    multi_db_model2
+		WHERE
+		    model_id = #{modelId}
+		]]>
+	</select>
+
+	<select id="selectEmployById" resultType="multi.database.model.Employ">
+		SELECT EMP_ID, ENO, EMP_KORN_NM FROM CI0020
+		WHERE EMP_ID = #{empId}
+	</select>
+	<insert id="saveModel" keyProperty="model_id">
+		REPLACE INTO multi_db_model2
+		    (model_id)
+		VALUES
+		    (#{modelId})
+	</insert>
+</mapper>

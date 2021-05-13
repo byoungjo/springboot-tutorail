@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.batchdev.multiDbTest.repository.postgreSql.BillMapper">
+    <select id="selectBillById" resultType="com.batchdev.multiDbTest.model.Bill">
+        SELECT id, first_name, last_name, minutes, data_usage, bill_amount, cr_date, cr_time
+        FROM bill_statements2
+        where id = #{id}
+    </select>
+
+    <select id="selectAllBills" resultType="com.batchdev.multiDbTest.model.Bill">
+        SELECT id, first_name, last_name, minutes, data_usage, bill_amount, cr_date, cr_time
+        FROM bill_statements2
+    </select>
+
+    <insert id="insertBill" parameterType="com.batchdev.multiDbTest.model.Bill">
+        INSERT INTO bill_statements2 (id, first_name, last_name, minutes, data_usage, bill_amount, cr_date, cr_time)
+        VALUES (#{id},#{first_name}, #{last_name}, #{minutes}, #{data_usage}, #{bill_amount}, to_char(now(),'YYYYMMDD'),to_char(now(),'HH24MISS'))
+    </insert>
+    <update id="updateBill" parameterType="com.batchdev.multiDbTest.model.Bill">
+        update bill_statements2
+        set first_name = #{first_name}
+           ,last_name = #{last_name}
+        where id = #{id}
+    </update>
+
+</mapper>
